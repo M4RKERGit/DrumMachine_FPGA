@@ -1,6 +1,7 @@
 module BeatSynt(
 input 		enable,
-input	[2:0] map_value
+input	[2:0] map_value,
+input [9:0] eight_note
 );
 
 always @(enable) begin
