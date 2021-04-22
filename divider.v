@@ -1,7 +1,8 @@
 module divider(
 input      	nrst,
 input  		clk_rx,
-output reg 	clk_tx
+output reg 	clk_tx,
+output reg	clk_front
 );
 
   reg	[11:0]	millis_counter;
@@ -13,17 +14,14 @@ output reg 	clk_tx
    else
 	
 	if	( clk_rx )	begin
+		clk_front <= clk_rx;
 		millis_counter = millis_counter + 1;
 		
 		if ( millis_counter == 12'd3 )	begin
-		clk_tx = ~clk_tx;
-		millis_counter = 12'd0;
+		clk_tx <= ~clk_tx;
+		millis_counter <= 12'd0;
 		end
-		
-		
    end
-	
-	
  end
 
 endmodule
