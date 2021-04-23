@@ -34,7 +34,7 @@ always @( posedge clk or negedge nrst ) begin
 		if ( !BT_push[0] )
 			BPM_value <= BPM_value - 5;
 			
-		high_border <= (map_counter * 3) - 1;
+		high_border <= ((map_counter + 1) * 3) - 1;
 		low_border <= high_border - 2;
 		
 		time_counter <= time_counter + 1;
@@ -44,7 +44,7 @@ always @( posedge clk or negedge nrst ) begin
 			time_counter <= 0;
 		end
 		
-		if ( map_counter >= 32 )
+		if ( map_counter >= 31 )
 			map_counter <= 0;
 		
 		//cur_sample <= chosen_map[high_border:low_border];
@@ -54,10 +54,10 @@ always @( posedge clk or negedge nrst ) begin
 		map_pointer[1] <= SW[1];
 		map_pointer[0] <= SW[0];
 		case( map_pointer )
-			0:	chosen_map <= map[0];
-			1:	chosen_map <= map[1];
-			2:	chosen_map <= map[2];
-			3:	chosen_map <= map[3];
+			00:	chosen_map <= map[0];
+			01:	chosen_map <= map[1];
+			10:	chosen_map <= map[2];
+			11:	chosen_map <= map[3];
 		endcase
 		end
 	end
